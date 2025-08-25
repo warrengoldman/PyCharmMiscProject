@@ -8,7 +8,9 @@ def create_bi_node(aStr):
 
 def main():
     # test_single_linked_list()ct()
-    test_double_linked_list_sort()
+    # test_double_linked_list_sort()
+    # test_double_linked_list_swap()
+    test_double_linked_list_reverse()
     # test_double_linked_list()
     # test_double_linked_list_obje
 
@@ -38,6 +40,36 @@ def test_double_linked_list_sort():
     three = create_bi_node("3")
     ll.append(three)
     ll.sort()
+    print(ll)
+
+def test_double_linked_list_swap():
+    ll = DoublyLinkedList()
+    four = create_bi_node("4")
+    ll.append(four)
+    two = create_bi_node("2")
+    ll.append(two)
+    one = create_bi_node("1")
+    ll.append(one)
+    three = create_bi_node("3")
+    ll.append(three)
+    five = create_bi_node("5")
+    ll.append(five)
+    ll.swap(two, three)
+    print(ll)
+
+def test_double_linked_list_reverse():
+    ll = DoublyLinkedList()
+    four = create_bi_node("4")
+    ll.append(four)
+    two = create_bi_node("2")
+    ll.append(two)
+    one = create_bi_node("1")
+    ll.append(one)
+    three = create_bi_node("3")
+    ll.append(three)
+    five = create_bi_node("5")
+    ll.append(five)
+    ll.reverse()
     print(ll)
 
 def test_double_linked_list():

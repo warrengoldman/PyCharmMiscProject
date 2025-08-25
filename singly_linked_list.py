@@ -54,7 +54,7 @@ class SinglyLinkedList:
         while True:
             if current_element == data:
                 return True
-            if current_element.next is None:
+            if current_element is None or current_element.next is None:
                 return False
             current_element = current_element.next
 
@@ -85,6 +85,8 @@ class SinglyLinkedList:
         return self.insert_at(0, data)
 
     def append(self, data):
+        if self.is_in_list(data):
+            return None
         if self.head is None:
             self.head = data
             return data
@@ -108,6 +110,17 @@ class SinglyLinkedList:
         else:
             self.insert_at(element2_index, element1)
             self.insert_at(element1_index, element2)
+
+    def reverse(self):
+        element_list = self.get_element_list()
+        list_idx = len(element_list) - 1
+        idx = 0
+        while list_idx >= 0:
+            current_node = element_list[idx]
+            self.delete_element(current_node)
+            self.insert_at(0, current_node)
+            list_idx -= 1
+            idx += 1
 
     def sort(self):
         element_list = self.get_element_list()

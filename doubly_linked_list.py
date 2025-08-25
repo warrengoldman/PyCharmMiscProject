@@ -4,10 +4,15 @@ class DoublyLinkedList(SinglyLinkedList):
         super().__init__()
     def append(self, data):
         current = super().append(data)
-        if self.head != current:
-            data.previous = current
-        elif self.head != data:
-            data.previous = current
+        if current is not None:
+            if self.head != current:
+                data.previous = current
+            elif self.head != data:
+                data.previous = current
+
+    def reverse(self):
+        super().reverse()
+        self.head.previous = None
 
     def insert_at(self, idx, data):
         previous = super().insert_at(idx, data)
