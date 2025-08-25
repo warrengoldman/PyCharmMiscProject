@@ -7,6 +7,8 @@ class UnidirectionalNode:
     def __gt__(self, other):
         return str(self.data) > str(other.data)
     def __eq__(self, other):
+        if other is None:
+            return False
         return str(self.data) == str(other.data)
     def __str__(self):
         next_data = self.next.data if self.next else "None"

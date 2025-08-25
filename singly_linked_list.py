@@ -1,8 +1,15 @@
 
-class LinkedList:
+class SinglyLinkedList:
 
     def __init__(self):
         self.head = None
+
+    def get_at(self, idx):
+        if idx >= 0:
+            element_list = self.get_element_list()
+            if idx < len(element_list):
+                return self.get_element_list()[idx]
+        return None
 
     def get_index(self, data):
         current = self.head
@@ -53,7 +60,7 @@ class LinkedList:
 
     def insert_at(self, idx, data):
         if self.is_in_list(data):
-            return
+            return None
         current_element = self.head
         previous_element = None
         current_idx = 0
@@ -72,6 +79,10 @@ class LinkedList:
             previous_element = current_element
             current_element = current_element.next
             current_idx += 1
+        return previous_element
+
+    def insert_at_head(self, data):
+        return self.insert_at(0, data)
 
     def append(self, data):
         if self.head is None:
@@ -99,13 +110,7 @@ class LinkedList:
             self.insert_at(element1_index, element2)
 
     def sort(self):
-        element_list = []
-        element = self.head
-        while True:
-            element_list.append(element)
-            if element.next is None:
-                break
-            element = element.next
+        element_list = self.get_element_list()
         element_list.sort()
         list_length = len(element_list)
         for i in range(list_length):
@@ -113,8 +118,10 @@ class LinkedList:
                 element_list[i-1].next = None
                 break
             elif i != 0:
-                element_list[i-1].next = element_list[i]
+                self.set_node_order(element_list[i-1], element_list[i])
+
         self.head = element_list[0]
+        return element_list[list_length-1]
 
     def get_list_str(self, str_list, data):
         if data is not None:
@@ -125,3 +132,18 @@ class LinkedList:
 
     def __str__(self):
         return str(self.get_list_str([], self.head))
+
+    def get_element_list(self):
+        element_list = []
+        element = self.head
+        while True:
+            if element_list.__contains__(element):
+                break
+            element_list.append(element)
+            if element.next is None:
+                break
+            element = element.next
+        return element_list
+
+    def set_node_order(self, previous_node, next_node):
+        previous_node.next = next_node
