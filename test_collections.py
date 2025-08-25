@@ -1,9 +1,24 @@
+from doubly_linked_list import DoublyLinkedList
 from singly_linked_list import LinkedList
-from my_nodes import UnidirectionalNode
+from my_nodes import UnidirectionalNode, BidirectionalNode
 def create_node(aStr):
     return UnidirectionalNode(aStr)
+def create_bi_node(aStr):
+    return BidirectionalNode(aStr)
 
 def main():
+    # test_single_linked_list()
+    test_double_linked_list()
+
+def test_double_linked_list():
+    ll = DoublyLinkedList()
+    one = create_bi_node("1")
+    ll.append(one)
+    two = create_bi_node("2")
+    ll.append(two)
+    print(ll)
+
+def test_single_linked_list():
     linked_list: LinkedList = LinkedList()
     one = create_node("1")
     linked_list.append(one)
@@ -20,7 +35,6 @@ def main():
     linked_list.insert_at(0, three)
 
     linked_list.swap(three, head)
-    print(linked_list)
     linked_list.sort()
     print(linked_list)
 

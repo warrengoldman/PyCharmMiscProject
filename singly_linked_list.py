@@ -76,13 +76,15 @@ class LinkedList:
     def append(self, data):
         if self.head is None:
             self.head = data
+            return data
         else:
             current = self.head
             while current.next:
                 if current == data:
-                    return
+                    return None
                 current = current.next
             current.next = data
+            return current
 
     def swap(self, element1, element2):
         element1_index = self.get_index(element1)
@@ -114,12 +116,12 @@ class LinkedList:
                 element_list[i-1].next = element_list[i]
         self.head = element_list[0]
 
-    def print_element(self, str_list, data):
+    def get_list_str(self, str_list, data):
         if data is not None:
-            str_list.append(f'Element data: {data.data}')
+            str_list.append(str(data))
         if data and data.next is not None:
-            self.print_element(str_list, data.next)
+            self.get_list_str(str_list, data.next)
         return str_list
 
     def __str__(self):
-        return str(self.print_element([], self.head))
+        return str(self.get_list_str([], self.head))
