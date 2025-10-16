@@ -5,10 +5,15 @@ class SinglyLinkedList:
         self.head = None
 
     def get_at(self, idx):
+        element_ctr = 0
         if idx >= 0:
-            element_list = self.get_element_list()
-            if idx < len(element_list):
-                return self.get_element_list()[idx]
+            current = self.head
+            while idx > element_ctr:
+                element_ctr += 1
+                if current.next is None:
+                    return None
+                current = current.next
+            return current
         return None
 
     def get_index(self, data):

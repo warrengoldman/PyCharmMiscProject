@@ -10,9 +10,11 @@ def main():
     # test_single_linked_list()ct()
     # test_double_linked_list_sort()
     # test_double_linked_list_swap()
-    test_double_linked_list_reverse()
+    # test_double_linked_list_reverse()
     # test_double_linked_list()
-    # test_double_linked_list_obje
+    # test_double_linked_list_objec
+#    test_single_linked_list_traverse()
+    test_single_linked_list_getat()
 
 def test_double_linked_list_object():
     ll = DoublyLinkedList()
@@ -108,6 +110,25 @@ def test_single_linked_list():
     linked_list.swap(three, head)
     linked_list.sort()
     print(linked_list)
+
+def test_single_linked_list_getat():
+    linked_list: SinglyLinkedList = SinglyLinkedList()
+    one = create_node("1")
+    linked_list.append(one)
+    linked_list.append(create_node("2"))
+    linked_list.append(create_node("4"))
+    node_two = linked_list.get_at(1)
+    print(f"Node at index 1: {node_two}")
+
+def test_single_linked_list_traverse():
+    linked_list: SinglyLinkedList = SinglyLinkedList()
+    one = create_node("1")
+    linked_list.append(one)
+    linked_list.append(create_node("2"))
+    linked_list.append(create_node("4"))
+
+    # while linked_list.hasNext():
+    #     print(linked_list.next().data)
 
 if __name__ == '__main__':
     main()
