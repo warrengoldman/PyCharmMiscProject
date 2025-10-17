@@ -1,3 +1,18 @@
+class UnidirectionalNode:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+    def __lt__(self, other):
+        return str(self.data) < str(other.data)
+    def __gt__(self, other):
+        return str(self.data) > str(other.data)
+    def __eq__(self, other):
+        if other is None:
+            return False
+        return str(self.data) == str(other.data)
+    def __str__(self):
+        next_data = self.next.data if self.next else "None"
+        return f'{self.data} => {next_data}'
 
 class SinglyLinkedList:
 
@@ -117,29 +132,40 @@ class SinglyLinkedList:
             self.insert_at(element1_index, element2)
 
     def reverse(self):
-        element_list = self.get_element_list()
-        list_idx = len(element_list) - 1
-        idx = 0
-        while list_idx >= 0:
-            current_node = element_list[idx]
-            self.delete_element(current_node)
-            self.insert_at(0, current_node)
-            list_idx -= 1
-            idx += 1
+        node = self.head
+        next_node = None
+        while node.next is not None:
+            new_node = self.create_node(node.data)
+            new_node.next = next_node
+            node = node.next
+            self.set_prev_node(new_node, node)
+            next_node = new_node
+        new_node = self.create_node(node.data)
+        new_node.next = next_node
+        self.head = new_node
+        self.set_prev_node(self.head, None)
+
+    def set_prev_node(self, new_node, prev_node):
+        pass
+
+    def create_node(self, data):
+        return UnidirectionalNode(data)
 
     def sort(self):
-        element_list = self.get_element_list()
-        element_list.sort()
-        list_length = len(element_list)
-        for i in range(list_length):
-            if i == list_length:
-                element_list[i-1].next = None
-                break
-            elif i != 0:
-                self.set_node_order(element_list[i-1], element_list[i])
-
-        self.head = element_list[0]
-        return element_list[list_length-1]
+        if self.head is None or self.head.next is None:
+            return
+        current = self.head
+        sort_complete = False
+        while not sort_complete:
+            sort_complete = True
+            while current and current.next:
+                if current > current.next:
+                    sort_complete = False
+                    temp = current.next
+                    self.swap(current, current.next)
+                    current = self.head
+                current = current.next
+            current = self.head
 
     def get_list_str(self, str_list, data):
         if data is not None:
@@ -150,18 +176,6 @@ class SinglyLinkedList:
 
     def __str__(self):
         return str(self.get_list_str([], self.head))
-
-    def get_element_list(self):
-        element_list = []
-        element = self.head
-        while True:
-            if element_list.__contains__(element):
-                break
-            element_list.append(element)
-            if element.next is None:
-                break
-            element = element.next
-        return element_list
 
     def set_node_order(self, previous_node, next_node):
         previous_node.next = next_node
