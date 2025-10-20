@@ -161,7 +161,6 @@ class SinglyLinkedList:
             while current and current.next:
                 if current > current.next:
                     sort_complete = False
-                    temp = current.next
                     self.swap(current, current.next)
                     current = self.head
                 current = current.next
